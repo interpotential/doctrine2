@@ -8,6 +8,7 @@
 
 namespace Doctrine\Tests\Models\EagerBatched;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\Table;
 use Doctrine\Tests\Models\EagerBatched\Tag;
@@ -39,6 +40,15 @@ class Article
      * @var Tag[]|Collection
      */
     protected $tags;
+
+    /**
+     * Article constructor.
+     */
+    public function __construct()
+    {
+        $this->tags = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -104,6 +114,10 @@ class Article
      */
     public function setTags($tags)
     {
+        if (is_array($tags)) {
+            $tags = new ArrayCollection($tags);
+        }
+
         $this->tags = $tags;
 
         return $this;

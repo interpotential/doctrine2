@@ -89,10 +89,10 @@ class Tag
     /**
      * Set article
      *
-     * @param mixed $article
+     * @param Article $article
      * @return $this
      */
-    public function setArticle($article)
+    public function setArticle(Article $article)
     {
         $this->article = $article;
 
