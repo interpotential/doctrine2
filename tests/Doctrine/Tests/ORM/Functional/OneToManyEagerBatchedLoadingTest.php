@@ -86,8 +86,8 @@ class OneToManyEagerBatchedLoading extends OrmFunctionalTestCase
         $this->assertEquals(101, $this->_sqlLoggerStack->currentQuery - $currentQueryBefore);
 
         $lazyLoadingTime = microtime(true) - $start;
-
-        $this->assertGreaterThan($batchedLoadingTime, $lazyLoadingTime, 'Make sure the improvement improves');
+        $improvement = ($lazyLoadingTime - $batchedLoadingTime)/$lazyLoadingTime;
+        $this->assertGreaterThan(0.1, $improvement, 'Make sure the improvement improves significantly (at least 10%)');
     }
 
     /**
@@ -114,8 +114,9 @@ class OneToManyEagerBatchedLoading extends OrmFunctionalTestCase
 
         $time = microtime(true) - $start;
 
-        $this->assertGreaterThan($batchedLoadingTime, $time, 'Make sure the improvement improves');
+        $lazyLoadingTime = microtime(true) - $start;
+        $improvement = ($lazyLoadingTime - $batchedLoadingTime)/$lazyLoadingTime;
+        $this->assertGreaterThan(0.1, $improvement, 'Make sure the improvement improves significantly (at least 10%)');
     }
-
 
 }
