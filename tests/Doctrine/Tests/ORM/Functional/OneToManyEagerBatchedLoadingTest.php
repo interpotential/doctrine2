@@ -65,10 +65,10 @@ class OneToManyEagerBatchedLoading extends OrmFunctionalTestCase
     /**
      * @depends testEagerBatchedLoading
      * @param $batchedLoadingTime
+     * @group non-cacheable
      */
     public function testLazyLoading($batchedLoadingTime)
     {
-
         $start = microtime(true);
 
         $currentQueryBefore = $this->_sqlLoggerStack->currentQuery;
@@ -93,6 +93,7 @@ class OneToManyEagerBatchedLoading extends OrmFunctionalTestCase
     /**
      * @depends testEagerBatchedLoading
      * @param $batchedLoadingTime
+     * @group non-cacheable
      */
     public function testEagerLoading($batchedLoadingTime)
     {
